@@ -1072,4 +1072,19 @@
         @test length(final_pop) == length(pop.individuals)
     end
 
+    @testset "Transmission Types" begin
+        # One infected host among 1000: the chance of infection is 0.5 x 1 / 1000 for :frequency and 0.5 x 1 for :density
+        new_cases = (model, transmission_type) -> begin
+            Random.seed!(42)
+            pop = Population([Individual(BitMatrix([false false true false]), 25); [Individual(BitMatrix([true false false false]), 25) for _ in 1:999]])
+            params = SimulationParameters([model], [1.0;;], 0.0, 0.0, 30, :none, 2, transmission_type)
+            count(host -> !host[1, 1], simulate(pop, params)[end]) - 1
+        end
+
+        @test new_cases(SIModel(0.5, 0.0), :frequency) < 10
+        @test new_cases(SEIRModel(0.5, 0.0, 0.0, 3), :frequency) < 10
+        @test 400 < new_cases(SIModel(0.5, 0.0), :density) < 600
+        @test 400 < new_cases(SEIRModel(0.5, 0.0, 0.0, 3), :density) < 600
+    end
+
 end

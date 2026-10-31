@@ -224,9 +224,9 @@ function process_infections!(population::Population, alive::Vector{Bool}, strain
     for s_idx in susceptible_indices
         # Get the baseline infection pressure
         if transmission_type == :density
-            infection_pressure = transmission_rate * n_infected / n_pop
+            infection_pressure = transmission_rate * n_infected
         else
-            infection_pressure = transmission_rate
+            infection_pressure = transmission_rate * n_infected / n_pop
         end
 
         # Adjust for coinfection interactions
@@ -282,9 +282,9 @@ function process_exposures!(population::Population, alive::Vector{Bool}, strain:
     for s_idx in susceptible_indices
         # Get the baseline infection pressure
         if transmission_type == :density
-            infection_pressure = transmission_rate * n_infected / n_pop
+            infection_pressure = transmission_rate * n_infected
         else
-            infection_pressure = transmission_rate
+            infection_pressure = transmission_rate * n_infected / n_pop
         end
 
         # Adjust for coinfection interactions

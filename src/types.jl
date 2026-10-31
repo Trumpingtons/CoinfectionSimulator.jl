@@ -198,7 +198,7 @@ Parameters for a coinfection simulation.
 - `age_maturity::Int`: Age at which individuals can reproduce
 - `introduction::Symbol`: How strains are introduced (:simultaneous, :random, or :none)
 - `time_steps::Int`: Number of time steps to simulate
-- `transmission_type::Symbol`: Type of transmission (:frequency (default), or :density)
+- `transmission_type::Symbol`: Type of transmission: :frequency (default), transmission x infected / hosts, or :density, transmission x infected
 """
 struct SimulationParameters
     models::Vector{<:DiseaseModel}

@@ -21,7 +21,7 @@ using Distributions: Binomial, Poisson
     - `age_maturity::Int`: Age (in time steps) at which individuals can reproduce
     - `introduction::Symbol`: How strains are introduced (:simultaneous, :random, or :none)
     - `time_steps::Int`: Number of time steps to simulate
-    - `transmission_type::Symbol`: Type of transmission (:density or :frequency, defaults to :frequency)
+    - `transmission_type::Symbol`: Type of transmission, defaults to :frequency. With :frequency the chance of infection per time step is transmission x infected / hosts; with :density it is transmission x infected, so the transmission is per infected host and should be small
 
 # Returns
 Vector of population states at each time step (Vector{Population})
